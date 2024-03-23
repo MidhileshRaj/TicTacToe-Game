@@ -7,6 +7,7 @@ class GamePageController extends ChangeNotifier {
 
   String currentPlayer = '';
 
+  bool isGameEnd = false;
   TextEditingController playerX = TextEditingController(text: "player1");
   TextEditingController playerO = TextEditingController(text: "player2");
 
@@ -31,10 +32,13 @@ class GamePageController extends ChangeNotifier {
       String winner = checkForWinner();
 
       if (winner.isNotEmpty) {
+        isGameEnd = true;
+        notifyListeners();
         showWinnerDialog(winner, context);
       }
     }
   }
+
 
   String checkForWinner() {
     for (int i = 0; i < 3; i++) {
@@ -130,6 +134,7 @@ class GamePageController extends ChangeNotifier {
 
   void resetGame() {
     // setState(() {
+    isGameEnd = false;
     startGame();
     notifyListeners();
     // });

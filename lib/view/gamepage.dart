@@ -7,7 +7,7 @@ class GamePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    // Provider.of<GamePageController>(context,listen: false).resetGame();
     return ColorFiltered(
       // ignore: prefer_const_constructors
       colorFilter: ColorFilter.mode(
@@ -73,6 +73,19 @@ class GamePage extends StatelessWidget {
                     },
                   ),
                 ),
+                const SizedBox(height: 10,),
+                Consumer<GamePageController>(builder: (context, value, child) {
+                  if(value.isGameEnd){
+                    return ElevatedButton(onPressed: () {
+
+                      value.resetGame();
+                    }, child: const Icon(Icons.restart_alt_rounded));
+                  }else{
+                    return const SizedBox();
+                  }
+                },)
+
+
               ],
             ),
           ),
