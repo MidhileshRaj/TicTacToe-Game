@@ -4,6 +4,9 @@ import 'package:tic_tac_toe/view/initial_page.dart';
 
 class GamePageController extends ChangeNotifier {
   List<List<String>> gameGrid = [];
+   bool isBotplay = false;
+
+
 
   String currentPlayer = '';
 
@@ -138,5 +141,11 @@ class GamePageController extends ChangeNotifier {
     startGame();
     notifyListeners();
     // });
+  }
+
+  void selectPlayMode(){
+    isBotplay =!isBotplay;
+    notifyListeners();
+
   }
 }
