@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tic_tac_toe/controller/gamepage_controller.dart';
-import 'package:tic_tac_toe/view/botpaly%20test.dart';
+import 'package:tic_tac_toe/controller/bot_player_page.dart';
 
-class GamePage extends StatelessWidget {
-  const GamePage({super.key});
+class BotPlay extends StatelessWidget {
+  const BotPlay({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Provider.of<GamePageController>(context,listen: false).resetGame();
+    // Provider.of<TicTacToeGame>(context,listen: false).resetGame();
     return ColorFiltered(
       // ignore: prefer_const_constructors
       colorFilter: ColorFilter.mode(
@@ -16,7 +15,7 @@ class GamePage extends StatelessWidget {
         BlendMode.overlay, // Blend mode
       ),
       child: Container(
-        decoration: BoxDecoration(
+        decoration:  BoxDecoration(
           color: Colors.tealAccent[700],
           // image: const DecorationImage(image: AssetImage("assets/images/tictactoe.jpg"))
         ),
@@ -35,8 +34,7 @@ class GamePage extends StatelessWidget {
                     // This is important to make the GridView work inside a Column
                     physics: const NeverScrollableScrollPhysics(),
                     // Disable scrolling in the GridView
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       mainAxisSpacing: 10, // Adjust the spacing as needed
                       crossAxisSpacing: 10, // Adjust the spacing as needed
@@ -47,18 +45,18 @@ class GamePage extends StatelessWidget {
                       final col = index % 3;
 
                       return GestureDetector(
-                        onTap: () => Provider.of<GamePageController>(context,
-                                listen: false)
-                            .onCellTapped(row, col, context),
+                        onTap: () =>
+                            Provider.of<TicTacToeGame>(context, listen: false)
+                                .onCellTapped(row, col, context),
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.black,
                             border: Border.all(width: 3, color: Colors.yellow),
                           ),
                           child: Center(
-                            child: Consumer<GamePageController>(
+                            child: Consumer<TicTacToeGame>(
                               builder: (BuildContext context,
-                                  GamePageController value, Widget? child) {
+                                  TicTacToeGame value, Widget? child) {
                                 return Text(
                                   value.gameGrid[row][col],
                                   style: const TextStyle(
@@ -75,27 +73,20 @@ class GamePage extends StatelessWidget {
                     },
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Consumer<GamePageController>(
-                  builder: (context, value, child) {
-                    if (value.isGameEnd) {
-                      return ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => BotPlay(),
-                                ));
-                            // value.resetGame();
-                          },
-                          child: const Icon(Icons.restart_alt_rounded));
-                    } else {
-                      return const SizedBox();
-                    }
-                  },
-                )
+                const SizedBox(height: 10,),
+                Consumer<TicTacToeGame>(builder: (context, value, child) {
+                  if(value.isGameEnd){
+                    return ElevatedButton(onPressed: () {
+
+
+
+                    }, child: const Icon(Icons.restart_alt_rounded));
+                  }else{
+                    return const SizedBox();
+                  }
+                },)
+
+
               ],
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tic_tac_toe/controller/bot_player_page.dart';
 import 'package:tic_tac_toe/controller/gamepage_controller.dart';
 import 'package:tic_tac_toe/view/initial_page.dart';
 
@@ -16,6 +17,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => GamePageController(),
+        ),ChangeNotifierProvider(
+          create: (context) => TicTacToeGame(),
         ),
       ],
       child: MaterialApp(
